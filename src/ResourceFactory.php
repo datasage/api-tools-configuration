@@ -48,7 +48,6 @@ class ResourceFactory
     }
 
     /**
-     * @param array $config
      * @param string $filePath
      * @return ConfigResource
      */

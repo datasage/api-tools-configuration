@@ -2,11 +2,11 @@
 
 namespace LaminasTest\ApiTools\Configuration;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\Factory\ConfigWriterFactory;
 use Laminas\Config\Writer\PhpArray;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 class ConfigWriterFactoryTest extends TestCase
 {
@@ -38,7 +38,7 @@ class ConfigWriterFactoryTest extends TestCase
         $factory      = $this->factory;
         $configWriter = $factory($this->container);
 
-        $this->assertClassHasAttribute('useBracketArraySyntax', $configWriter::class);
+        $this->assertObjectHasProperty('useBracketArraySyntax', $configWriter);
         $this->assertFalse($configWriter->getUseClassNameScalars());
     }
 
@@ -54,7 +54,7 @@ class ConfigWriterFactoryTest extends TestCase
         $factory      = $this->factory;
         $configWriter = $factory($this->container);
 
-        $this->assertClassHasAttribute('useBracketArraySyntax', $configWriter::class);
+        $this->assertObjectHasProperty('useBracketArraySyntax', $configWriter);
     }
 
     public function testClassNameScalarsFlagIsSet(): void

@@ -2,12 +2,12 @@
 
 namespace LaminasTest\ApiTools\Configuration;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\ConfigResource;
 use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
 use Laminas\Config\Writer\WriterInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
+use Psr\Container\ContainerInterface;
 
 use function uniqid;
 
@@ -62,12 +62,11 @@ class ConfigResourceFactoryTest extends TestCase
             ->with(self::WRITER_SERVICE)
             ->willReturn($this->writer);
 
-        $factory             = $this->factory;
-        $configResource      = $factory($this->container);
-        $configResourceClass = $configResource::class;
-        $this->assertClassHasAttribute('config', $configResourceClass);
-        $this->assertClassHasAttribute('fileName', $configResourceClass);
-        $this->assertClassHasAttribute('writer', $configResourceClass);
+        $factory        = $this->factory;
+        $configResource = $factory($this->container);
+        $this->assertObjectHasProperty('config', $configResource);
+        $this->assertObjectHasProperty('fileName', $configResource);
+        $this->assertObjectHasProperty('writer', $configResource);
         $this->assertSame([], $configResource->fetch(false));
     }
 
@@ -86,12 +85,11 @@ class ConfigResourceFactoryTest extends TestCase
             [self::WRITER_SERVICE, $this->writer],
         ]));
 
-        $factory             = $this->factory;
-        $configResource      = $factory($this->container);
-        $configResourceClass = $configResource::class;
+        $factory        = $this->factory;
+        $configResource = $factory($this->container);
 
-        $this->assertClassHasAttribute('config', $configResourceClass);
-        $this->assertClassHasAttribute('fileName', $configResourceClass);
+        $this->assertObjectHasProperty('config', $configResource);
+        $this->assertObjectHasProperty('fileName', $configResource);
         $configValues = $configResource->fetch(false);
         $this->assertSame($configValues['api-tools-configuration.config_file'], $configFile);
     }
@@ -110,12 +108,11 @@ class ConfigResourceFactoryTest extends TestCase
             [self::WRITER_SERVICE, $this->writer],
         ]));
 
-        $factory             = $this->factory;
-        $configResource      = $factory($this->container);
-        $configResourceClass = $configResource::class;
+        $factory        = $this->factory;
+        $configResource = $factory($this->container);
 
         $expectedConfig = ['custom-configuration.foo' => 'bar'];
-        $this->assertClassHasAttribute('config', $configResourceClass);
+        $this->assertObjectHasProperty('config', $configResource);
         $this->assertSame($expectedConfig, $configResource->fetch(false));
     }
 }
