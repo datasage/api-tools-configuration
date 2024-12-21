@@ -2,10 +2,10 @@
 
 namespace Laminas\ApiTools\Configuration\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\ConfigWriter;
 use Laminas\ApiTools\Configuration\ModuleUtils;
 use Laminas\ApiTools\Configuration\ResourceFactory;
+use Psr\Container\ContainerInterface;
 
 class ResourceFactoryFactory
 {

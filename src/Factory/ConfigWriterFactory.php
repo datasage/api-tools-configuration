@@ -2,8 +2,8 @@
 
 namespace Laminas\ApiTools\Configuration\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\Config\Writer\PhpArray;
+use Psr\Container\ContainerInterface;
 
 class ConfigWriterFactory
 {

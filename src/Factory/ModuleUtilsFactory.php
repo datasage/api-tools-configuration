@@ -2,8 +2,8 @@
 
 namespace Laminas\ApiTools\Configuration\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\ModuleUtils;
+use Psr\Container\ContainerInterface;
 
 class ModuleUtilsFactory
 {

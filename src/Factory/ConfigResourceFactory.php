@@ -2,9 +2,9 @@
 
 namespace Laminas\ApiTools\Configuration\Factory;
 
-use Interop\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\ConfigResource;
 use Laminas\ApiTools\Configuration\ConfigWriter;
+use Psr\Container\ContainerInterface;
 
 class ConfigResourceFactory
 {
@@ -48,7 +48,6 @@ class ConfigResourceFactory
     /**
      * Discover the configuration file to use.
      *
-     * @param array $config
      * @return string
      */
     private function discoverConfigFile(array $config)

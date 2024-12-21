@@ -222,7 +222,7 @@ class ConfigResourceTest extends TestCase
      *     2: array<string, string|array>
      * }>
      */
-    public function replaceKeyPairs(): array
+    public static function replaceKeyPairs(): array
     {
         return [
             'scalar-top-level'        => ['top', 'updated', ['top' => 'updated']],
@@ -315,7 +315,7 @@ class ConfigResourceTest extends TestCase
      *     1: array<string, string|array>
      * }>
      */
-    public function deleteKeyPairs(): array
+    public static function deleteKeyPairs(): array
     {
         return [
             'scalar-top-level'                       => [

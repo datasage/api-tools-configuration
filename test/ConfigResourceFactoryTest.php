@@ -2,7 +2,7 @@
 
 namespace LaminasTest\ApiTools\Configuration;
 
-use Interop\Container\ContainerInterface;
+use Psr\Container\ContainerInterface;
 use Laminas\ApiTools\Configuration\ConfigResource;
 use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
 use Laminas\Config\Writer\WriterInterface;
@@ -64,10 +64,9 @@ class ConfigResourceFactoryTest extends TestCase
 
         $factory             = $this->factory;
         $configResource      = $factory($this->container);
-        $configResourceClass = $configResource::class;
-        $this->assertClassHasAttribute('config', $configResourceClass);
-        $this->assertClassHasAttribute('fileName', $configResourceClass);
-        $this->assertClassHasAttribute('writer', $configResourceClass);
+        $this->assertObjectHasProperty('config', $configResource);
+        $this->assertObjectHasProperty('fileName', $configResource);
+        $this->assertObjectHasProperty('writer', $configResource);
         $this->assertSame([], $configResource->fetch(false));
     }
 
@@ -88,10 +87,9 @@ class ConfigResourceFactoryTest extends TestCase
 
         $factory             = $this->factory;
         $configResource      = $factory($this->container);
-        $configResourceClass = $configResource::class;
 
-        $this->assertClassHasAttribute('config', $configResourceClass);
-        $this->assertClassHasAttribute('fileName', $configResourceClass);
+        $this->assertObjectHasProperty('config', $configResource);
+        $this->assertObjectHasProperty('fileName', $configResource);
         $configValues = $configResource->fetch(false);
         $this->assertSame($configValues['api-tools-configuration.config_file'], $configFile);
     }
@@ -112,10 +110,9 @@ class ConfigResourceFactoryTest extends TestCase
 
         $factory             = $this->factory;
         $configResource      = $factory($this->container);
-        $configResourceClass = $configResource::class;
 
         $expectedConfig = ['custom-configuration.foo' => 'bar'];
-        $this->assertClassHasAttribute('config', $configResourceClass);
+        $this->assertObjectHasProperty('config', $configResource);
         $this->assertSame($expectedConfig, $configResource->fetch(false));
     }
 }

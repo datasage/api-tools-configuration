@@ -43,7 +43,6 @@ class ConfigResource
     protected $writer;
 
     /**
-     * @param array $config
      * @param string $fileName
      */
     public function __construct(array $config, $fileName, ConfigWriter $writer)
@@ -140,7 +139,6 @@ class ConfigResource
      *
      * Used by consumers only; takes the configuration data and writes it verbatim.
      *
-     * @param  array $data
      * @return array
      */
     public function overWrite(array $data)
@@ -185,7 +183,6 @@ class ConfigResource
      *
      * @param  string|array $keys
      * @param  mixed $value
-     * @param  array $config
      * @return array
      */
     public function replaceKey($keys, $value, array $config)
@@ -257,7 +254,6 @@ class ConfigResource
     /**
      * Traverse a nested array and flatten to dot-separated key/value pairs
      *
-     * @param  array $array
      * @param  string $currentKey Current key, if called recursively
      * @return array
      */
@@ -304,7 +300,6 @@ class ConfigResource
     /**
      * Recursively extract keys into a nested array
      *
-     * @param array $keys
      * @param string $value
      * @param array $array
      */
@@ -326,7 +321,6 @@ class ConfigResource
      * Delete a nested key/value pair in an array
      *
      * @param array $array
-     * @param array $keys
      */
     protected function deleteByKey(&$array, array $keys): void
     {
