@@ -5,6 +5,7 @@ namespace LaminasTest\ApiTools\Configuration;
 use Laminas\ApiTools\Configuration\ConfigResource;
 use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
 use Laminas\Config\Writer\WriterInterface;
+use Override;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -31,6 +32,7 @@ class ConfigResourceFactoryTest extends TestCase
      */
     private $writer;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->writer    = $this->createMock(WriterInterface::class);
@@ -80,10 +82,10 @@ class ConfigResourceFactoryTest extends TestCase
         ];
 
         $this->container->method('has')->with('config')->willReturn(true);
-        $this->container->expects(self::atLeastOnce())->method('get')->will(self::returnValueMap([
+        $this->container->expects(self::atLeastOnce())->method('get')->willReturnMap([
             ['config', $config],
             [self::WRITER_SERVICE, $this->writer],
-        ]));
+        ]);
 
         $factory        = $this->factory;
         $configResource = $factory($this->container);
@@ -103,10 +105,10 @@ class ConfigResourceFactoryTest extends TestCase
         ];
 
         $this->container->method('has')->with('config')->willReturn(true);
-        $this->container->expects(self::atLeastOnce())->method('get')->will(self::returnValueMap([
+        $this->container->expects(self::atLeastOnce())->method('get')->willReturnMap([
             ['config', $config],
             [self::WRITER_SERVICE, $this->writer],
-        ]));
+        ]);
 
         $factory        = $this->factory;
         $configResource = $factory($this->container);
