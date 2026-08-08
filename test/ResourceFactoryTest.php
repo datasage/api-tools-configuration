@@ -5,6 +5,7 @@ namespace LaminasTest\ApiTools\Configuration;
 use Laminas\ApiTools\Configuration\ConfigResource;
 use Laminas\ApiTools\Configuration\ModuleUtils;
 use Laminas\ApiTools\Configuration\ResourceFactory;
+use Override;
 use PHPUnit\Framework\TestCase;
 
 class ResourceFactoryTest extends TestCase
@@ -15,6 +16,7 @@ class ResourceFactoryTest extends TestCase
     /** @var ResourceFactory */
     protected $resourceFactory;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->resourceFactory = new ResourceFactory(

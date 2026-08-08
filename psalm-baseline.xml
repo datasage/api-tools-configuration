@@ -117,28 +117,11 @@
     <ClassMustBeFinal>
       <code><![CDATA[ConfigResourceFactoryTest]]></code>
     </ClassMustBeFinal>
-    <DeprecatedMethod>
-      <code><![CDATA[self::returnValueMap([
-            ['config', $config],
-            [self::WRITER_SERVICE, $this->writer],
-        ])]]></code>
-      <code><![CDATA[self::returnValueMap([
-            ['config', $config],
-            [self::WRITER_SERVICE, $this->writer],
-        ])]]></code>
-    </DeprecatedMethod>
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-    </MissingOverrideAttribute>
   </file>
   <file src="test/ConfigResourceTest.php">
     <ClassMustBeFinal>
       <code><![CDATA[ConfigResourceTest]]></code>
     </ClassMustBeFinal>
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-      <code><![CDATA[protected function tearDown(): void]]></code>
-    </MissingOverrideAttribute>
     <PossiblyFalseArgument>
       <code><![CDATA[$this->file]]></code>
       <code><![CDATA[$this->file]]></code>
@@ -154,16 +137,10 @@
     <ClassMustBeFinal>
       <code><![CDATA[ConfigWriterFactoryTest]]></code>
     </ClassMustBeFinal>
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-    </MissingOverrideAttribute>
   </file>
   <file src="test/ResourceFactoryTest.php">
     <ClassMustBeFinal>
       <code><![CDATA[ResourceFactoryTest]]></code>
     </ClassMustBeFinal>
-    <MissingOverrideAttribute>
-      <code><![CDATA[protected function setUp(): void]]></code>
-    </MissingOverrideAttribute>
   </file>
 </files>

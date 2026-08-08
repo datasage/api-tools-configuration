@@ -4,6 +4,8 @@ namespace LaminasTest\ApiTools\Configuration;
 
 use Laminas\ApiTools\Configuration\ConfigResource;
 use Laminas\Config\Writer\PhpArray;
+use Override;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use stdClass;
 
@@ -29,6 +31,7 @@ class ConfigResourceTest extends TestCase
     /** @var TestAsset\ConfigWriter */
     protected $writer;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->removeScaffold();
@@ -39,6 +42,7 @@ class ConfigResourceTest extends TestCase
         $this->configResource = new ConfigResource([], $this->file, $this->writer);
     }
 
+    #[Override]
     protected function tearDown(): void
     {
         $this->removeScaffold();
@@ -278,12 +282,12 @@ class ConfigResourceTest extends TestCase
     }
 
     /**
-     * @dataProvider replaceKeyPairs
      * @param string|array $value
      * @param string|array $expected
      * @psalm-param string|array<array-key, string> $value
      * @psalm-param array<string, string|array>     $expected
      */
+    #[DataProvider('replaceKeyPairs')]
     public function testReplaceKey(string $key, $value, $expected): void
     {
         $config = [
@@ -384,11 +388,11 @@ class ConfigResourceTest extends TestCase
     }
 
     /**
-     * @dataProvider deleteKeyPairs
      * @param string|array $key
      * @psalm-param string|array<array-key, string> $key
      * @psalm-param array<string, string|array>     $expected
      */
+    #[DataProvider('deleteKeyPairs')]
     public function testDeleteKey($key, array $expected): void
     {
         $config = [

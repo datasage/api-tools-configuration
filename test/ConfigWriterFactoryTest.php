@@ -4,6 +4,7 @@ namespace LaminasTest\ApiTools\Configuration;
 
 use Laminas\ApiTools\Configuration\Factory\ConfigWriterFactory;
 use Laminas\Config\Writer\PhpArray;
+use Override;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
@@ -19,6 +20,7 @@ class ConfigWriterFactoryTest extends TestCase
     /** @var ConfigWriterFactory */
     private $factory;
 
+    #[Override]
     protected function setUp(): void
     {
         $this->container = $this->createMock(ContainerInterface::class);
