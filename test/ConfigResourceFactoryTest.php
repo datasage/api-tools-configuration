@@ -7,6 +7,7 @@ use Laminas\ApiTools\Configuration\Factory\ConfigResourceFactory;
 use Laminas\Config\Writer\WriterInterface;
 use Override;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\MockObject\Stub;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
@@ -27,22 +28,22 @@ class ConfigResourceFactoryTest extends TestCase
     private $factory;
 
     /**
-     * @var WriterInterface|MockObject
-     * @psalm-var WriterInterface&MockObject
+     * @var WriterInterface|Stub
+     * @psalm-var WriterInterface&Stub
      */
     private $writer;
 
     #[Override]
     protected function setUp(): void
     {
-        $this->writer    = $this->createMock(WriterInterface::class);
+        $this->writer    = $this->createStub(WriterInterface::class);
         $this->container = $this->createMock(ContainerInterface::class);
         $this->factory   = new ConfigResourceFactory();
     }
 
     public function testReturnsInstanceOfConfigResource(): void
     {
-        $this->container->method('has')->with('config')->willReturn(false);
+        $this->container->expects(self::atLeastOnce())->method('has')->with('config')->willReturn(false);
         $this->container
             ->expects(self::once())
             ->method('get')
@@ -57,7 +58,7 @@ class ConfigResourceFactoryTest extends TestCase
 
     public function testDefaultAttributesValues(): void
     {
-        $this->container->method('has')->with('config')->willReturn(false);
+        $this->container->expects(self::atLeastOnce())->method('has')->with('config')->willReturn(false);
         $this->container
             ->expects(self::once())
             ->method('get')
@@ -81,7 +82,7 @@ class ConfigResourceFactoryTest extends TestCase
             ],
         ];
 
-        $this->container->method('has')->with('config')->willReturn(true);
+        $this->container->expects(self::atLeastOnce())->method('has')->with('config')->willReturn(true);
         $this->container->expects(self::atLeastOnce())->method('get')->willReturnMap([
             ['config', $config],
             [self::WRITER_SERVICE, $this->writer],
@@ -104,7 +105,7 @@ class ConfigResourceFactoryTest extends TestCase
             ],
         ];
 
-        $this->container->method('has')->with('config')->willReturn(true);
+        $this->container->expects(self::atLeastOnce())->method('has')->with('config')->willReturn(true);
         $this->container->expects(self::atLeastOnce())->method('get')->willReturnMap([
             ['config', $config],
             [self::WRITER_SERVICE, $this->writer],

@@ -5,40 +5,34 @@ namespace LaminasTest\ApiTools\Configuration;
 use Laminas\ApiTools\Configuration\Factory\ConfigWriterFactory;
 use Laminas\Config\Writer\PhpArray;
 use Override;
-use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 class ConfigWriterFactoryTest extends TestCase
 {
-    /**
-     * @var ContainerInterface|MockObject
-     * @psalm-var ContainerInterface&MockObject
-     */
-    private $container;
-
     /** @var ConfigWriterFactory */
     private $factory;
 
     #[Override]
     protected function setUp(): void
     {
-        $this->container = $this->createMock(ContainerInterface::class);
-        $this->factory   = new ConfigWriterFactory();
+        $this->factory = new ConfigWriterFactory();
     }
 
     public function testReturnsInstanceOfPhpArrayWriter(): void
     {
+        $container    = $this->createStub(ContainerInterface::class);
         $factory      = $this->factory;
-        $configWriter = $factory($this->container);
+        $configWriter = $factory($container);
 
         $this->assertInstanceOf(PhpArray::class, $configWriter);
     }
 
     public function testDefaultFlagsValues(): void
     {
+        $container    = $this->createStub(ContainerInterface::class);
         $factory      = $this->factory;
-        $configWriter = $factory($this->container);
+        $configWriter = $factory($container);
 
         $this->assertObjectHasProperty('useBracketArraySyntax', $configWriter);
         $this->assertFalse($configWriter->getUseClassNameScalars());
@@ -46,30 +40,32 @@ class ConfigWriterFactoryTest extends TestCase
 
     public function testEnableShortArrayFlagIsSet(): void
     {
-        $this->container->method('has')->with('config')->willReturn(true);
-        $this->container->expects(self::atLeastOnce())->method('get')->with('config')->willReturn([
+        $container = $this->createMock(ContainerInterface::class);
+        $container->expects(self::atLeastOnce())->method('has')->with('config')->willReturn(true);
+        $container->expects(self::atLeastOnce())->method('get')->with('config')->willReturn([
             'api-tools-configuration' => [
                 'enable_short_array' => true,
             ],
         ]);
 
         $factory      = $this->factory;
-        $configWriter = $factory($this->container);
+        $configWriter = $factory($container);
 
         $this->assertObjectHasProperty('useBracketArraySyntax', $configWriter);
     }
 
     public function testClassNameScalarsFlagIsSet(): void
     {
-        $this->container->method('has')->with('config')->willReturn(true);
-        $this->container->expects(self::atLeastOnce())->method('get')->with('config')->willReturn([
+        $container = $this->createMock(ContainerInterface::class);
+        $container->expects(self::atLeastOnce())->method('has')->with('config')->willReturn(true);
+        $container->expects(self::atLeastOnce())->method('get')->with('config')->willReturn([
             'api-tools-configuration' => [
                 'class_name_scalars' => true,
             ],
         ]);
 
         $factory      = $this->factory;
-        $configWriter = $factory($this->container);
+        $configWriter = $factory($container);
 
         $this->assertTrue($configWriter->getUseClassNameScalars());
     }
